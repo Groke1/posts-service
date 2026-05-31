@@ -1,0 +1,29 @@
+type Comment {
+    id: Int64!
+    postID: Int64!
+    parentID: Int64
+    authorID: Int64!
+    text: String!
+    createdAt: Time!
+    updatedAt: Time!
+}
+
+input CreateCommentInput {
+    postID: Int64!
+    parentID: Int64
+    authorID: Int64!
+    text: String!
+}
+
+extend type Query {
+    comments(postID: Int64!, parentID: Int64, limit: Int!, offset: Int!): [Comment!]!
+    comment(id: Int64!): Comment
+}
+
+extend type Mutation {
+    createComment(input: CreateCommentInput!): Comment!
+}
+
+extend type Subscription {
+    commentAdded(postID: Int64!): Comment!
+}

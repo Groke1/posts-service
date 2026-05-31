@@ -1,0 +1,26 @@
+type Post {
+    id: Int64!
+    title: String!
+    text: String!
+    authorID: Int64!
+    commentsEnabled: Boolean!
+    createdAt: Time!
+    updatedAt: Time!
+}
+
+input CreatePostInput {
+    title: String!
+    text: String!
+    authorID: Int64!
+    commentsEnabled: Boolean = true
+}
+
+extend type Query {
+    posts(authorID: Int64, limit: Int!, offset: Int!): [Post!]!
+    post(id: Int64!): Post
+}
+
+extend type Mutation {
+    createPost(input: CreatePostInput!): Post!
+    setPostCommentsEnabled(postID: Int64!, authorID: Int64!, enabled: Boolean!): Post!
+}

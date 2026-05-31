@@ -1,0 +1,21 @@
+schema:
+  - api/posts/v1/*.graphql
+
+exec:
+  filename: pkg/generated/posts/graphql/generated/generated.go
+  package: generated
+
+model:
+  filename: pkg/generated/posts/graphql/model/models_gen.go
+  package: model
+
+resolver:
+  layout: follow-schema
+  dir: internal/controller/graphql
+  package: graphql
+  filename_template: "{name}.resolvers.go"
+
+models:
+  Int64:
+    model:
+      - github.com/99designs/gqlgen/graphql.Int64
